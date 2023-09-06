@@ -37,7 +37,8 @@ The -i command line option is the raw-recordings-folder the first input folder w
 The -o command line option is the sliced-samples-folder the second output folder where the sliced .wav files will be output
 
 The optional -t command line argument is the silence detection threshold which is set default to -40 dB
-Setting this to 
+Setting this to -24 might get tighter slices where you might not need to edit the portion of the sample preceding the initial attack or move the sample playback offset closer to the actual sound youre hearing. 
+I was able to use the .wav files cut with -40 dB easily in the drag and drop Channel Sampler of FL Studio.
 
 # Notes
 
@@ -65,3 +66,6 @@ How to split an mp3 file by detecting silent parts?
 
 https://askubuntu.com/questions/1264779/how-to-split-an-mp3-file-by-detecting-silent-parts
 
+FL Studio
+
+https://www.image-line.com/
