@@ -23,7 +23,7 @@ logging.basicConfig(filename='logs/slicer.log', encoding='utf-8', level=logging.
 sys.setrecursionlimit(10000)
 
 # spliting audio file into seperate sample .wav files 16 bit 44100
-def splitAudioFile (audioFile, outputDir. silence_threshold = -40):
+def splitAudioFile (audioFile, outputDir, silence_threshold = -40):
    audioSegment = AudioSegment.from_file(audioFile)
    fileNameBase = os.path.splitext (os.path.basename(audioFile))[0]
 
@@ -73,31 +73,37 @@ def normalizeSamples (slicedWavDir, normalizedWavDir):
 
 if __name__ == "__main__":
 
-   parser = argparse.ArgumentParser()
+   try:
 
-   parser.add_argument("-t", "--silence_threshold", help = "silence threshold in decibels")
+      parser = argparse.ArgumentParser()
 
-   parser.add_argument("-i", "--input_dir", help = "recording files input folder")
- 
-   parser.add_argument("-o", "--output_dir", help = "sliced sample files output folder")
+      parser.add_argument("-t", "--silence_threshold", help = "silence threshold in decibels")
 
-   args = parser.parse_args()
-
-   if args.input_dir:
-      rawRecordingsDir = args.input_dir
-
-      if args.output_dir:
-         slicedWavDir = args.output_dir
+      parser.add_argument("-i", "--input_dir", help = "recording files input folder")
    
-         if args.silence_threshold:
-            silence_threshold = args.silence_threshold
+      parser.add_argument("-o", "--output_dir", help = "sliced sample files output folder")
 
-         sliceRawRecordings (rawRecordingsDir, slicedWavDir, silence_threshold)
+      args = parser.parse_args()
+
+      if args.input_dir:
+         rawRecordingsDir = args.input_dir
+
+         if args.output_dir:
+            slicedWavDir = args.output_dir
+      
+            if args.silence_threshold:
+               silence_threshold = args.silence_threshold
+
+            sliceRawRecordings (rawRecordingsDir, slicedWavDir, silence_threshold)
+         else:
+            print("Need to specify samples files output directory")
+            logging.error("Need to specify samples files output directory")
       else:
-         print("Need to specify samples files output directory")
-   else:
-      print("Need to specify input recordings directory")
+         print("Need to specify input recordings directory")
+         logging.error("Need to specify input recordings directory")
 
+   except:
+      logging.error("See command line usage: python slicer.py -h")
 
    
 
