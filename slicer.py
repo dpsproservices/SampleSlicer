@@ -23,11 +23,11 @@ logging.basicConfig(filename='logs/slicer.log', encoding='utf-8', level=logging.
 sys.setrecursionlimit(10000)
 
 # spliting audio file into seperate sample .wav files 16 bit 44100
-def splitAudioFile (audioFile, outputDir):
+def splitAudioFile (audioFile, outputDir. silence_threshold = -40):
    audioSegment = AudioSegment.from_file(audioFile)
    fileNameBase = os.path.splitext (os.path.basename(audioFile))[0]
 
-   audioChunks = split_on_silence (audioSegment, min_silence_len=140, silence_thresh=-40)
+   audioChunks = split_on_silence (audioSegment, min_silence_len=140, silence_thresh=silence_threshold)
 
    # loop is used to iterate over the output list
    for i, chunk in enumerate (audioChunks):
@@ -35,7 +35,7 @@ def splitAudioFile (audioFile, outputDir):
      print("Exporting file: " + outputFile)
      chunk.export (outputFile, format='wav', parameters=["-ac", "2", "-ar", "44100", "-acodec", "pcm_s16le", "-sample_fmt", "s16"])
 
-def sliceRawRecordings (rawRecordingsDir, slicedWavDir):
+def sliceRawRecordings (rawRecordingsDir, slicedWavDir, silence_threshold = -40):
    
    # make new directory under sliced wav dir for current date time YYYY-MM-DD-HH-MM-SS-PM
    outputDir = slicedWavDir + "/" + time.strftime("%Y-%m-%d-%I-%M-%S-%p")
@@ -46,7 +46,7 @@ def sliceRawRecordings (rawRecordingsDir, slicedWavDir):
    for extension in extension_list:
       for audioFile in glob.glob (extension):
          print("Splitting: " + audioFile)
-         splitAudioFile (audioFile, outputDir)
+         splitAudioFile (audioFile, outputDir, silence_threshold)
 
 def normalizeAudioFile (audioFile, outputDir):
    audioSegment = AudioSegment.from_file(audioFile)
@@ -75,6 +75,8 @@ if __name__ == "__main__":
 
    parser = argparse.ArgumentParser()
 
+   parser.add_argument("-t", "--silence_threshold", help = "silence threshold in decibels")
+
    parser.add_argument("-i", "--input_dir", help = "recording files input folder")
  
    parser.add_argument("-o", "--output_dir", help = "sliced sample files output folder")
@@ -87,7 +89,10 @@ if __name__ == "__main__":
       if args.output_dir:
          slicedWavDir = args.output_dir
    
-         sliceRawRecordings (rawRecordingsDir, slicedWavDir)
+         if args.silence_threshold:
+            silence_threshold = args.silence_threshold
+
+         sliceRawRecordings (rawRecordingsDir, slicedWavDir, silence_threshold)
       else:
          print("Need to specify samples files output directory")
    else:
