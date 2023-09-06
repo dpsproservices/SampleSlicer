@@ -26,11 +26,11 @@ Create the secomnd folder where the sliced sample files will be output into.
 
 # How to run
 
-python slicer.py raw-recordings-folder sliced-samples-folder
+python slicer.py -i raw-recordings-folder -o sliced-samples-folder
 
-raw-recordings-folder is the first folder where the raw recordings are placed
+The -i command line option is the raw-recordings-folder the first input folder where the raw recordings are placed
 
-sliced-samples-folder is the second output folder where the sliced .wav files will be output
+The -o command line option is the sliced-samples-folder the second output folder where the sliced .wav files will be output
 
 # References
 
