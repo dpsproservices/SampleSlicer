@@ -1,6 +1,6 @@
 # SampleSlicer
 Use the open source python pydub with ffmpeg to process a directory or folder full of raw recordings
-and slice them into seperated individual 16bit stereo .wav files
+and slice them into seperated individual 16 bit stereo .wav files
 in a second folder.
 
 TO DO: 
@@ -22,7 +22,7 @@ This code repo was made using python 3 and MS Visual Studio Code
 # Setup raw recording files and folders
 
 Copy paste or move all your raw recordings into a folder.
-Create the secomnd folder where the sliced sample files will be output into.
+Create the second folder where the sliced sample files will be output into.
 
 # How to run
 
