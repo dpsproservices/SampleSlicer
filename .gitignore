@@ -163,5 +163,5 @@ cython_debug/
 
 .DS_Store
 **/.DS_Store
-resources/.DS_Store
-resources/xml/.DS_Store
+
+logs/*

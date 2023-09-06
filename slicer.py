@@ -1,15 +1,14 @@
 import sys
 import os
-import os.path
 import time
 import logging
 import pathlib
 from pathlib import Path
-#import shutil
 import logging
 import glob
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+import argparse
 
 # ------------------------------------------------------------------------------------
 # Log file logging
@@ -27,7 +26,6 @@ sys.setrecursionlimit(10000)
 def splitAudioFile (audioFile, outputDir):
    audioSegment = AudioSegment.from_file(audioFile)
    fileNameBase = os.path.splitext (os.path.basename(audioFile))[0]
-   #print(fileNameBase)
 
    audioChunks = split_on_silence (audioSegment, min_silence_len=140, silence_thresh=-40)
 
@@ -53,7 +51,6 @@ def sliceRawRecordings (rawRecordingsDir, slicedWavDir):
 def normalizeAudioFile (audioFile, outputDir):
    audioSegment = AudioSegment.from_file(audioFile)
    fileNameBase = os.path.splitext (os.path.basename(audioFile))[0]
-   #print(fileNameBase)
    outputFile = str(outputDir) + "/" + fileNameBase + "_normalized.wav" 
    audioSegment.export (outputFile, format='wav', frame_rate=44100, channels=2, sample_width=2)
    
@@ -76,19 +73,28 @@ def normalizeSamples (slicedWavDir, normalizedWavDir):
 
 if __name__ == "__main__":
 
-   rawRecordingsDir = "/Volumes/4TB/sound-design/1_raw_recordings"
+   parser = argparse.ArgumentParser()
 
-   slicedWavDir = "/Volumes/4TB/sound-design/2_sliced_wav"
+   parser.add_argument("-i", "--input_dir", help = "recording files input folder")
+ 
+   parser.add_argument("-o", "--output_dir", help = "sliced sample files output folder")
 
-   normalizedWavDir = "/Volumes/4TB/sound-design/3_normalized_wav"
+   args = parser.parse_args()
 
-   #rawRecordingsPath = Path (rawRecordingsDir)
+   if args.input_dir:
+      rawRecordingsDir = args.input_dir
+
+      if args.output_dir:
+         slicedWavDir = args.output_dir
    
-   slicedWavPath = Path (slicedWavDir)
-   
-   #normalizedWavPath = Path (normalizedWavDir)
+         sliceRawRecordings (rawRecordingsDir, slicedWavDir)
+      else:
+         print("Need to specify samples files output directory")
+   else:
+      print("Need to specify input recordings directory")
 
-   sliceRawRecordings (rawRecordingsDir, slicedWavDir)
+
+   
 
 
 

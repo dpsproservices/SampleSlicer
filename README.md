@@ -1,24 +1,42 @@
 # SampleSlicer
-Use the open source python pydub to process a directory or folder full of raw recordings
+Use the open source python pydub with ffmpeg to process a directory or folder full of raw recordings
 and slice them into seperated individual 16bit stereo .wav files
-in a 2nd folder.
-Then normalize all those wave files in the 2nd folder into a 3rd folder
-for further processing.
+in a second folder.
 
-# Setup
-Install ffmpeg with brew
+TO DO: 
 
-Then install PyDub with pip
+Normalize all the .wav files in the second folder into a third folder for further processing.
+Peak volume in decibels to 0 dB by default
 
-# Run
+# Install dependencies
+1. Install homebrew
 
-Copy or move all the raw recordings into the folder specified in globals.py
-Create the 2nd and 3rd folders specified in glboals.py where the files will be output
+2. Install python or conda or miniconda
 
-python slicer.py
+This code repo was made using python 3 and MS Visual Studio Code
+
+3. Install ffmpeg with brew
+
+4. Install PyDub with pip3
+
+# Setup raw recording files and folders
+
+Copy paste or move all your raw recordings into a folder.
+Create the secomnd folder where the sliced sample files will be output into.
+
+# How to run
+
+python slicer.py raw-recordings-folder sliced-samples-folder
+
+raw-recordings-folder is the first folder where the raw recordings are placed
+
+sliced-samples-folder is the second output folder where the sliced .wav files will be output
 
 # References
--------------------------
+
+Homebrew
+
+https://brew.sh/
 
 ffmpeg
 
@@ -31,15 +49,3 @@ https://github.com/jiaaro/pydub
 How to split an mp3 file by detecting silent parts?
 
 https://askubuntu.com/questions/1264779/how-to-split-an-mp3-file-by-detecting-silent-parts
-
-
-License (MIT License)
-Copyright © 2023 Joseph Skarulis, https://dpsproservices.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
