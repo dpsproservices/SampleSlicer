@@ -175,11 +175,3 @@ if __name__ == "__main__":
 
    except:
       logging.error("See command line usage: python slicer.py -h")
-
-   
-
-
-
-
-
-    
