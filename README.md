@@ -1,10 +1,9 @@
 # SampleSlicer
-Use the open source python pydub with ffmpeg to process a directory or folder full of raw recordings
-and slice them into seperated individual 16 bit stereo .wav files
-in a second folder.
+Uses the open source python pydub with ffmpeg to process a directory or folder full of raw recordings
+and slice them into seperated individual 16 bit stereo .wav files in a second folder.
 
-Normalize all the .wav files in the second folder for further processing.
-Peak volume in decibels to 0 dB by default
+Normalizes all the .wav files in the second folder for further processing.
+Peak volume in decibels is set to 0 dB by default.
 
 # Install dependencies
 
